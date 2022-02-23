@@ -3,6 +3,9 @@ $ipaddress=""
 #password used to access T-Rex Miner via http
 $password=""
 
+$ipaddress = Read-host "Enter IP Address"
+$password = Read-host "Enter password"
+
 #pull numbers from whattomine
 $alephium = wget "https://whattomine.com/coins/349.json?hr=1.0&p=0.0&fee=0.0&cost=0.0&hcost=0.0&span_br=1h&span_d=24" | ConvertFrom-Json
 $etherium = wget "https://whattomine.com/coins/151.json?hr=1000.0&p=0.0&fee=0.0&cost=0.0&hcost=0.0&span_br=1h&span_d=24" | ConvertFrom-Json
