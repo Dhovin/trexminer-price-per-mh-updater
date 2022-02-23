@@ -19,3 +19,4 @@ $sid = Invoke-WebRequest -Uri "http://$ipaddress`:4067/login?password=$password"
 Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHcoefficient`:$ALPHcoefficient`",`"sid`":`"$($sid.sid)`"}" -Uri "http://192.168.10.49:4067/config"
 #logs out 
 Invoke-WebRequest -Uri "http://$ipaddress`:4067/logout?sid=$($sid.sid)"
+pause
