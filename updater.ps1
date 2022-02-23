@@ -17,6 +17,8 @@ $ETHcoefficient = ([decimal]$etherium.profit.Replace("$",""))/1000
 $sid = Invoke-WebRequest -Uri "http://$ipaddress`:4067/login?password=$password" | ConvertFrom-Json
 #updates profit-per-mh
 Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHcoefficient`:$ALPHcoefficient`",`"sid`":`"$($sid.sid)`"}" -Uri "http://192.168.10.49:4067/config"
+#restart T-Rex Miner (unfortunately required to update)
+Invoke-WebRequest -Uri "http://$ipaddress`:4067/control?command=restart&sid=$($sid.sid)"
 #logs out 
 Invoke-WebRequest -Uri "http://$ipaddress`:4067/logout?sid=$($sid.sid)"
 pause
