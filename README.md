@@ -1,0 +1,1 @@
+# trexminer-coefficient-updater
