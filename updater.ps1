@@ -16,7 +16,7 @@ $ETHppMH = ([decimal]$etherium.profit.Replace("$",""))/1000
 #Login to T-Rex Miner
 $sid = Invoke-WebRequest -Uri "http://$ipaddress`:4067/login?password=$password" | ConvertFrom-Json
 #updates profit-per-mh
-Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHppMH`:$ALPHppMH`",`"sid`":`"$($sid.sid)`"}" -Uri "http://192.168.10.49:4067/config"
+Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHppMH`:$ALPHppMH`",`"sid`":`"$($sid.sid)`"}" -Uri "http://$ipaddress`:4067/config"
 #restart T-Rex Miner (unfortunately required to update)
 Invoke-WebRequest -Uri "http://$ipaddress`:4067/control?command=restart&sid=$($sid.sid)"
 #logs out 
