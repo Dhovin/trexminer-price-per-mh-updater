@@ -14,11 +14,15 @@ $ALPHppMH = ([decimal]$alephium.profit.Replace("$",""))/1000
 $ETHppMH = ([decimal]$etherium.profit.Replace("$",""))/1000
 
 #Login to T-Rex Miner
+Write-Host "Logging into T-Rex API"
 $sid = Invoke-WebRequest -Uri "http://$ipaddress`:4067/login?password=$password" | ConvertFrom-Json
 #updates profit-per-mh
-Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHppMH`:$ALPHppMH`",`"sid`":`"$($sid.sid)`"}" -Uri "http://$ipaddress`:4067/config"
+Write-Host "Updating price per MH"
+$trash=Invoke-RestMethod -Method POST -Body "{`"profit_per_mh`":`"$ETHppMH`:$ALPHppMH`",`"sid`":`"$($sid.sid)`"}" -Uri "http://$ipaddress`:4067/config"
 #restart T-Rex Miner (unfortunately required to update)
-Invoke-WebRequest -Uri "http://$ipaddress`:4067/control?command=restart&sid=$($sid.sid)"
-#logs out 
-Invoke-WebRequest -Uri "http://$ipaddress`:4067/logout?sid=$($sid.sid)"
+Write-Host "Restarting T-Rex Miner"
+$trash=Invoke-WebRequest -Uri "http://$ipaddress`:4067/control?command=restart&sid=$($sid.sid)"
+#logs out
+Write-Host "Logging out"
+$trash=Invoke-WebRequest -Uri "http://$ipaddress`:4067/logout?sid=$($sid.sid)"
 pause
